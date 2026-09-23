@@ -40,4 +40,23 @@ internal class CarrinhoCompras
     public double ValorTotal => _valorTotal;
     public CupomDesconto Cupom => _cupom;
 
+    public void AdicionarItem(ItemCarrinho item)
+    {
+        if (!_itens.Contains(item))
+        {
+            this._itens.Add(item);
+        }
+    }
+
+    public bool RemoverItem(int idProduto)
+    {
+        var item = BuscarItem(idProduto);
+
+        if (item != null)
+            return this._itens.Remove(item);
+
+        Console.WriteLine("Error: Item não encontrado no carrinho!");
+        return false;
+    }
+
 }
