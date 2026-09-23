@@ -59,4 +59,20 @@ internal class CarrinhoCompras
         return false;
     }
 
+    public ItemCarrinho? BuscarItem(int idProduto)
+    {
+        return this._itens.FirstOrDefault(item => item.IdProduto == idProduto);
+    }
+
+    public bool AplicarCupom(CupomDesconto cupom)
+    {
+        if (cupom != null && cupom.ValidarCupom(this._valorTotal) == true)
+        {
+            this._cupom = cupom;
+            CalcularTotal();
+            return true;
+        }
+        return false;
+    }
+
 }
