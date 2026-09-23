@@ -75,4 +75,25 @@ internal class CarrinhoCompras
         return false;
     }
 
+    public double CalcularTotal()
+    {
+        double soma = 0;
+
+        foreach (var item in this._itens)
+        {
+            soma += item.CalcularSubTotal();
+        }
+
+        //Falta a lógica do desconto do cupom
+        if (this._cupom != null && this._cupom.ValidarCupom(soma))
+        {
+            double desconto = soma * (this._cupom.PercentualDesconto / 100.0);
+            soma -= desconto;
+        }
+
+        this._valorTotal = soma;
+        return this._valorTotal;
+    }
+
+
 }
