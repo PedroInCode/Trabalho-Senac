@@ -15,8 +15,28 @@ namespace trabalho_senac
 
         public int IdProduto => _idProduto;
         public string NomeProduto => _nomeProduto;
-        public double PrecoUnitaorio => _precoUnitario;
+        public double PrecoUnitario => _precoUnitario;
+        public int Quantidade => _quantidade;
+
+        public void AtualizarQuantidade(int novaQuantidade)
+        {
+            if (novaQuantidade <= 0)
+            {
+                return;
+            }
+
+            _quantidade = novaQuantidade;
+        }
         
+        public double CalcularSubtotal()
+        {
+            return _precoUnitario * _quantidade;
+        }
   
     }
+    
+        
+            
+        
+
 }
