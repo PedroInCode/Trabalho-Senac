@@ -42,9 +42,4 @@ namespace trabalho_senac
         }
   
     }
-    
-        
-            
-        
-
 }

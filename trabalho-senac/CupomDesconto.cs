@@ -34,32 +34,6 @@ internal class CupomDesconto
             return false;
         }
     }
-        
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
