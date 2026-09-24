@@ -12,6 +12,14 @@ namespace trabalho_senac
         private string _nomeProduto;
         private double _precoUnitario;
         private int _quantidade;
+        
+        public ItemCarrinho(int idProduto, string nomeProduto, double precoUnitario, int quantidade)
+        {
+            _idProduto = idProduto;
+            _nomeProduto = nomeProduto;
+            _precoUnitario = precoUnitario;
+            _quantidade = quantidade;
+        }
 
         public int IdProduto => _idProduto;
         public string NomeProduto => _nomeProduto;
@@ -34,9 +42,4 @@ namespace trabalho_senac
         }
   
     }
-    
-        
-            
-        
-
 }
