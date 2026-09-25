@@ -12,11 +12,34 @@ namespace trabalho_senac
         private string _nomeProduto;
         private double _precoUnitario;
         private int _quantidade;
+        
+        public ItemCarrinho(int idProduto, string nomeProduto, double precoUnitario, int quantidade)
+        {
+            _idProduto = idProduto;
+            _nomeProduto = nomeProduto;
+            _precoUnitario = precoUnitario;
+            _quantidade = quantidade;
+        }
 
         public int IdProduto => _idProduto;
         public string NomeProduto => _nomeProduto;
-        public double PrecoUnitaorio => _precoUnitario;
+        public double PrecoUnitario => _precoUnitario;
+        public int Quantidade => _quantidade;
+
+        public void AtualizarQuantidade(int novaQuantidade)
+        {
+            if (novaQuantidade <= 0)
+            {
+                return;
+            }
+
+            _quantidade = novaQuantidade;
+        }
         
+        public double CalcularSubtotal()
+        {
+            return _precoUnitario * _quantidade;
+        }
   
     }
 }
