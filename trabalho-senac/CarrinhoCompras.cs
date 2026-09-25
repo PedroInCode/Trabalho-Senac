@@ -87,7 +87,9 @@ internal class CarrinhoCompras
 
     public bool AplicarCupom(CupomDesconto cupom)
     {
-        if (cupom != null && cupom.ValidarCupom(this._valorTotal) == true)
+        double subtotal = this._itens.Sum(item => item.CalcularSubtotal());
+
+        if (cupom != null && cupom.ValidarCupom(subtotal) == true)
         {
             this._cupom = cupom;
             return true;
@@ -99,13 +101,8 @@ internal class CarrinhoCompras
     {
         double soma = 0;
 
-        foreach (var item in this._itens)
+        foreach (ItemCarrinho item in this._itens)
         {
-            if(item.Quantidade == 0)
-            {
-                int idProduto = item.IdProduto;
-                RemoverItem(idProduto);
-            }
             soma += item.CalcularSubtotal();
         }
 
@@ -128,9 +125,14 @@ internal class CarrinhoCompras
             return true;
         }
 
-        Console.WriteLine("Erro! A compra não pode ser finalizada.");
-        this._status = StatusCarrinho.Cancelado;
+        if(this._status == StatusCarrinho.Fechado)
+        {
+            Console.WriteLine("Aviso: O carrinho ja está fechado!!");
+        }
+        else
+        {
+            Console.WriteLine($"Erro: não é possível finalizar um carrinho com status {_status}");
+        } 
         return false;
     }
-
 }
