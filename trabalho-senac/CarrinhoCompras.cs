@@ -31,7 +31,6 @@ internal class CarrinhoCompras
     private StatusCarrinho _status;
     private double _valorTotal;
     private CupomDesconto? _cupom;
-    private bool _fecharCalculo;
 
     //Propriedades públicas
     public int IdCarrinho => _idCarrinho;
@@ -40,9 +39,8 @@ internal class CarrinhoCompras
     public StatusCarrinho Status => _status;
     public double ValorTotal => _valorTotal;
     public CupomDesconto? Cupom => _cupom;
-    public bool FecharCalculo => _fecharCalculo;
 
-    public CarrinhoCompras(int idcarrinho, string idcliente, CupomDesconto cupom)
+    public CarrinhoCompras(int idcarrinho, string idcliente, CupomDesconto? cupom)
     {
         this._idCarrinho = idcarrinho;
         this._idCliente = idcliente;
@@ -50,14 +48,24 @@ internal class CarrinhoCompras
         this._status = StatusCarrinho.Aberto;
         this._valorTotal = 0;
         this._cupom = cupom;
-        this._fecharCalculo = false;
     }
 
     public void AdicionarItem(ItemCarrinho item)
     {
-        if (!_itens.Contains(item))
+        var itemExistente = BuscarItem(item.IdProduto);
+
+        if (item.Quantidade <= 0)
         {
-            this._itens.Add(item);
+            Console.WriteLine("Erro: quantidade deve ser maior que zero");
+        }
+        
+        if(itemExistente == null)
+        {
+            _itens.Add(item);
+        }
+        else
+        {
+            itemExistente.AtualizarQuantidade(item.Quantidade);
         }
     }
 
@@ -109,22 +117,12 @@ internal class CarrinhoCompras
         }
 
         this._valorTotal = soma;
-
-        if(this._valorTotal == 0)
-        {
-            this._fecharCalculo = false;
-        }
-        else
-        {
-            this._fecharCalculo = true;
-        }
-
         return this._valorTotal;
     }
 
     public bool FinalizarCompra()
     {
-        if (this._status == StatusCarrinho.Aberto && this._fecharCalculo == true)
+        if (this._status == StatusCarrinho.Aberto)
         {
             this._status = StatusCarrinho.Fechado;
             return true;
