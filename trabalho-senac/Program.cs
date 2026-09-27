@@ -3,7 +3,7 @@ using trabalho_senac;
 
 internal class Program
 {
-
+    // Criando os Cupons (Erick)
     static void Main(string[] args)
     {
         CupomDesconto cupom1 = new CupomDesconto(
@@ -24,6 +24,22 @@ internal class Program
             20,
             200
             );
+
+
+        // Criando os Itens (Bianca)
+
+
+
+
+
+
+
+
+
+
+        // Criando os CarrinhoCompra (Pedro) 
+
+
     }
 }
 
